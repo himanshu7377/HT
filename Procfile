@@ -1,2 +1,4 @@
-web: npm start --prefix backend
-web: npm start --prefix frontend
+
+
+web: cd backend && npm start
+web: cd frontend && npm start
