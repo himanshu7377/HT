@@ -33,7 +33,7 @@ function Navbar() {
             </button>
             <div className="hidden lg:flex lg:items-center lg:space-x-4">
               <Link
-                to="#"
+                to="/"
                 className="text-white hover:text-gray-300 transition duration-300"
               >
                 Home
@@ -59,7 +59,8 @@ function Navbar() {
                 className="text-white hover:text-gray-300 transition duration-300"
                 onClick={() => navigate("/login")}
               >
-                 {sessionStorage.getItem("userName") === 'Guest' ? "Login" : "Logout"}
+                 {sessionStorage.getItem("userName") == null ? "Login" : "Logout"}
+                 {console.log('session',sessionStorage.getItem("userName"))}
 
               </button>
             </div>
