@@ -1,0 +1,1 @@
+use npm start for both backend and front end 
