@@ -4,7 +4,7 @@ const express = require('express');
 const cors= require('cors');
 const bodyParser = require('body-parser');
 const route = require('./route/emp.js');
-
+const port = process.env.PORT || 5000;
 const app = express();
 // Serve static files from the 'images' folder
 app.use('/Public', express.static('Public'));
@@ -20,6 +20,6 @@ app.get('/', (req, res) => {
 });
 connectDB();
 
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
