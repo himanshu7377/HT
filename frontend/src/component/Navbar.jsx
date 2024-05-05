@@ -57,7 +57,15 @@ function Navbar() {
               </span>
               <button
                 className="text-white hover:text-gray-300 transition duration-300"
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  if (sessionStorage.getItem("userName") !== null) {
+                    // User is logged in, so logout by clearing session storage
+                    sessionStorage.removeItem("userName");
+                  } else {
+                    // User is not logged in, navigate to the login page
+                    navigate("/login");
+                  }
+                }}
               >
                  {sessionStorage.getItem("userName") == null ? "Login" : "Logout"}
                  {console.log('session',sessionStorage.getItem("userName"))}

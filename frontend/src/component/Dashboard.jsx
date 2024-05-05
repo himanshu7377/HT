@@ -1,24 +1,22 @@
 import React, { useState ,useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+
 
 function Dashboard() {
   // State variable to track user login status
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const navigate = useNavigate();
+ 
   let username = sessionStorage.getItem("userName");
 
   useEffect(() => {
-    
-    if(isLoggedIn==false){
-      navigate("/login");
-    }
-    if(username!==null){
+    if(username=='admin'){
       setIsLoggedIn(true);
     }
+    
+   
 
     
-  },[username])
+  },[username,isLoggedIn])
   
   
   return (
