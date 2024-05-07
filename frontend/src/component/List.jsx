@@ -253,19 +253,42 @@ const List = () => {
         fetchData();
     }, [searchVal, deletedItem])
 
-     // Implement search functionality
-     const filteredEmployees = emp.filter((item) =>
-        item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
-        item.email.toLowerCase().includes(searchVal.toLowerCase())
-    );
 
 
-    const sortedEmployees = sortData(filteredEmployees, sortBy);
+    // Function to handle pagination and search
+    const filteredAndPaginatedEmployees = () => {
+        // Apply search filter on current page data
+        const filteredEmployees = emp
+            .slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage)
+            .filter((item) =>
+                item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
+                item.email.toLowerCase().includes(searchVal.toLowerCase())
+            );
+    
+        // Sort the filtered data
+        const sortedEmployees = sortData(filteredEmployees, sortBy);
+    
+        return sortedEmployees;
+    };
+    
 
-      // Function to handle pagination
-      const indexOfLastUser = currentPage * usersPerPage;
-      const indexOfFirstUser = indexOfLastUser - usersPerPage;
-      const currentUsers = sortedEmployees.slice(indexOfFirstUser, indexOfLastUser);
+
+
+
+
+
+    //  // Implement search functionality
+    //  const filteredEmployees = emp.filter((item) =>
+    //     item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
+    //     item.email.toLowerCase().includes(searchVal.toLowerCase())
+    // );
+
+
+
+    //   // Function to handle pagination
+    //   const indexOfLastUser = currentPage * usersPerPage;
+    //   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    //   const currentUsers = sortedEmployees.slice(indexOfFirstUser, indexOfLastUser);
   
       // Change page
       const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -341,7 +364,7 @@ const List = () => {
                         
 
                         {
-                            currentUsers.map((item, key) => {
+                            filteredAndPaginatedEmployees().map((item, key) => {
                                 return <tr key={key} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                                     <td class="">
