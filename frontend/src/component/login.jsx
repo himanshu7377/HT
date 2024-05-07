@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let Login = () => {
     const [userName, setUserName] = useState('');
@@ -12,10 +13,9 @@ let Login = () => {
         e.preventDefault();
 
         if (!userName || !password) {
-            setError('userName and password are required');
+            setError(`${!userName ? 'Username' : ''} ${!userName && !password ? 'and' : ''} ${!password ? 'Password' : ''} are required`);
             return;
         }
-
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
@@ -40,7 +40,7 @@ let Login = () => {
             // Redirect user to dashboard or perform other actions
             console.log('User logged in successfully');
             navigator("/", { replace: true })
-
+            toast.success('welcome back');
         } catch (error) {
             console.error(error);
             setError(error.message);
@@ -68,7 +68,7 @@ let Login = () => {
                                 User Name
                             </label>
                             <div className="mt-1">
-                                <input id="username" name="username" type="text" autoComplete="username" required value={userName} onChange={(e) => setUserName(e.target.value)}
+                                <input id="username" name="username" type="text" autoComplete="username"  value={userName} onChange={(e) => setUserName(e.target.value)}
 
                                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Enter your user name" />
@@ -80,7 +80,7 @@ let Login = () => {
                                 Password
                             </label>
                             <div className="mt-1">
-                                <input id="password" name="password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)}
+                                <input id="password" name="password" type="password" autoComplete="current-password"  value={password} onChange={(e) => setPassword(e.target.value)}
                                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Enter your password" />
                             </div>

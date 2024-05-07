@@ -168,14 +168,13 @@ const List = () => {
 
             if (response.ok) {
                 console.log('Form submitted successfully');
-                // document.getElementById("updatepop").classList.remove("hidden");
-                // document.getElementById("updatemain").classList.add("blur-sm","hidden")
-                // Optionally reset form fields
+                toast.success('Employee updated successfully');
                 fetchData();
                 setErrorM('');
             } 
         } catch (error) {
             console.error('Error submitting form:', error);
+            toast.error('Error updating employee');
         }
         setErrorM('');
 

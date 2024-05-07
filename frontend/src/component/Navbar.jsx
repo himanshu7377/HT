@@ -61,6 +61,7 @@ function Navbar() {
                   if (sessionStorage.getItem("userName") !== null) {
                     // User is logged in, so logout by clearing session storage
                     sessionStorage.removeItem("userName");
+                    navigate("/login");
                   } else {
                     // User is not logged in, navigate to the login page
                     navigate("/login");
